@@ -22,7 +22,7 @@ def contact(request):
             form.save()
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('contact')  # Redirect to the same page to clear the form
-    return render(request,'contact.html', {'form': form})
+    return render(request,'Contact.html', {'form': form})
 
 
 def search_product(request):
