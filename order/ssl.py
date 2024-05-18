@@ -20,9 +20,9 @@ def sslcommerz_payment_gateway(request,id,grand_total):
         'total_amount': grand_total,
         'currency': "BDT",
         'tran_id': unique_transaction_id_generator(),
-        'success_url': 'http://127.0.0.1:8000/order/success/',
-        'fail_url': 'http://127.0.0.1:8000/order/failed/',
-        'cancel_url': 'http://127.0.0.1:8000/home',
+        'success_url': 'https://glam-grid.onrender.com/order/success/',
+        'fail_url': 'https://glam-grid.onrender.com/order/failed/',
+        'cancel_url': 'https://glam-grid.onrender.com/home',
         'emi_option': 0,
         'cus_email': request.user.email,  # Retrieve email from the current user session
         'cus_phone': "request.user.phone",  # Retrieve phone from the current user session
