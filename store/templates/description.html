@@ -1,0 +1,52 @@
+{% extends "home.html" %} 
+{% load static %} 
+{% block load_css %}
+<link rel="stylesheet" type="text/css" href="{% static "css/description.css" %}" />
+{% endblock load_css %} 
+{% block body %}
+<div class="des-container my-5 pt-5"> <!-- Add pt-5 class for top padding -->
+    <div class="row">
+      <div class="col-md-6" id="des-img">
+        <img src="{{product.image.url}}" alt="Product Image" class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <h1>{{product.name}}</h1>
+        <p>Description: {{product.description}}</p>
+        <div class="size-container mb-5 mt-5">
+          <h4 class="mb-3">Select Size :</h4>
+          {% if product.sizes %}
+              {% for size in product.sizes.all %}
+                  <button class="size-btn" id="sz-btn" data-size-id="{{ size.id }}">{{ size.name }}</button>
+              {% endfor %}
+          {% endif %}
+        </div>
+        <p class="text-dark fs-5 fw-bold mb-5">Price : {{product.price}} Tk</p>
+        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary add-to-cart-btn" data-product-id="{{ product.id }}">
+          <i class="fas fa-shopping-cart me-2 text-primary"></i> Add to cart
+        </a>
+      </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<script>
+  $(document).ready(function() {
+      $('.size-btn').click(function() {
+          $('.size-btn').removeClass('active'); // Remove 'active' class from all size buttons
+          $(this).addClass('active'); // Add 'active' class to the clicked size button
+      });
+
+      $('.add-to-cart-btn').click(function(e) {
+          e.preventDefault(); // Prevent the default action of the anchor tag
+          var productId = $(this).data('product-id');
+          var selectedSizeId = $('.size-btn.active').data('size-id'); // Get the ID of the selected size
+          if (!selectedSizeId) {
+              // If no size is selected, show a message or take any other appropriate action
+              alert('Please select a size');
+              return;
+          }
+          // Redirect to the add_to_cart URL with the selected product ID and size ID
+          window.location.href = '/cart/add_to_cart/' + productId + '/' + selectedSizeId + '/';
+      });
+  });
+</script>
+{% endblock body %}

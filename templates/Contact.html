@@ -1,0 +1,79 @@
+{% extends "home.html" %}
+{% load static %}
+{% block load_css %}
+<link rel="stylesheet" type="text/css" href="{% static " css/contact.css" %}" />
+{% endblock load_css %}
+{% block body %}
+<!-- Bootstrap 5 Contact Form Snippet -->
+
+<div class="container-fluid px-5 my-5 p-5" id="contact">
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+      <div class="card border-0 rounded-3 shadow-lg overflow-hidden">
+        <div class="card-body p-0">
+          <div class="row g-0">
+            <div class="col-sm-6 d-none d-sm-block bg-image">
+              <img src="{% static "img/contact1.jpg" %}" alt="" height="520" id="conim">
+            </div>
+            <div class="col-sm-6 p-4">
+              <div class="text-center">
+                <div class="h5 fw-light" style="font-size: 20px">
+                  <b>Contact Form</b>
+                </div>
+                <br />
+              </div>
+              {% if messages %}
+              <div class="container mt-3">
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <!-- Contact Form -->
+              <form id="contactForm" method="post">
+                {% csrf_token %}
+                <!-- Name Input -->
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="name" name="name" type="text" placeholder="Name" required />
+                  <label for="name">Name</label>
+                </div>
+
+                <!-- Email Input -->
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="emailAddress" name="email" type="email" placeholder="Email Address"
+                    required />
+                  <label for="emailAddress">Email Address</label>
+                </div>
+
+                <!-- Message Input -->
+                <div class="form-floating mb-3">
+                  <textarea class="form-control" id="message" name="message" type="text" placeholder="Message" style="height: 10rem"
+                    required></textarea>
+                  <label for="message">Message</label>
+                </div>
+
+                <!-- Submit button -->
+                <div class="d-grid">
+                  <button class="btn btn-primary btn-lg" id="submitButton" type="submit">
+                    Submit
+                  </button>
+                </div>
+              </form>
+              <!-- End of contact form -->
+
+              <!-- End of contact form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CDN Link to SB Forms Scripts -->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+{% endblock body %}

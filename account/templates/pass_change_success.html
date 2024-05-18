@@ -1,0 +1,37 @@
+{% extends 'home.html' %} 
+{% load static %} 
+{% block load_css %} 
+<link rel="stylesheet" type="text/css" href="{% static "css/pass_change.css" %}" /> 
+{% endblock %} 
+{% block body %}
+<div class="pass-container">
+  <h2>Password Changed Successfully</h2>
+  <p>Your password has been changed successfully.</p>
+</div>
+
+<style>
+  .pass-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Take 90% of the viewport height */
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f8f9fa; /* Optional: Add a background color */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    text-align: center; /* Center-align the text */
+  }
+
+  .pass-container h2 {
+    margin-bottom: 20px;
+  }
+
+  .pass-container p {
+    font-size: 1.2em; /* Optional: Adjust font size */
+    color: #333; /* Optional: Adjust text color */
+  }
+</style>
+{% endblock %}

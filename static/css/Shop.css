@@ -1,0 +1,17 @@
+.navbar-brand {
+    margin-right: auto;
+    /* Push brand/logo to the left */
+}
+
+.navbar-nav .nav-link {
+    margin-right: 15px;
+    /* Adjust the value as needed */
+}
+
+.category-box {
+    cursor: pointer;
+}
+
+.shop-container{
+    padding-top: 100px;
+}

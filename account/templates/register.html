@@ -1,0 +1,82 @@
+{% extends "home.html" %}
+{% load static %}
+{% block load_css %}
+<link rel="stylesheet" type="text/css" href="{% static "css/register.css" %}" />
+{% endblock load_css %}
+
+{% block body %}
+
+<div class="wrapper">
+    <div class="logo">
+        <img src="{% static "img/login_12765272.png" %}" alt="">
+    </div>
+    <div class="text-center mt-3 name">
+        Sign Up
+    </div>
+    {% comment %} Forms Error Message {% endcomment %}
+    {% if form.errors %} 
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}
+                    <ul>
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+    
+    <form class="p-3 mt-3" method="POST">
+        {% csrf_token %}
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-envelope"></span> <!-- Changed icon for email -->
+            <input type="email" name="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password1" id="password1" placeholder="Password" required>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password2" id="password2" placeholder="Confirm Password" required>
+        </div>
+        <button class="btn mt-3">Sign Up</button>
+    </form>
+
+    
+    <div class="text-center fs-6">
+        <h4>or</h4>
+    </div>    
+    <div class="text-center fs-6">
+        <p> If You Have Already Register Please <a href="{% url "login" %}">Login</a></p>
+    </div>
+    {% comment %} <div class="social-links">
+        <ul style="list-style-type:none"; >
+            <li>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            </li>
+            <li>
+                <a href="#" class="google"><i class="fab fa-google"></i></a>
+            </li>
+        </ul>
+    </div> {% endcomment %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock body %}    

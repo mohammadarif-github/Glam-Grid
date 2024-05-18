@@ -1,0 +1,175 @@
+{% extends "home.html" %}
+{% load static %}
+{% block load_css %}
+<link rel="stylesheet" type="text/css" href="{% static "css/Men.css" %}" />
+{% endblock load_css %}
+
+{% block body %}
+<!-- Fruits Shop Start-->
+<div class="container-fluid men py-5">
+  <div class="container py-2 mt-5">
+    <h1 class="mb-5 mt-5">{{main}} Collections</h1>
+    <div class="row g-4">
+      <div class="col-lg-12">
+        <div class="row g-4">
+          <div class="col-lg-3">
+            <div class="row g-4">
+              <div class="col-lg-12">
+                <div class="mb-3">
+                  <h2 class="mb-3">Categories</h2>
+                  <ul class="list-unstyled fruite-categorie">
+                    <div class="d-flex justify-content-between fruite-name">
+                      {% if categories %}
+                      <ul class="list-unstyled fruite-categorie">
+                        {% for category in categories %}
+                          <li><a href="{% url "women_filter" category.slug %}" style="text-decoration: none; color: inherit; font-size: 1.3rem;">☐{{category.name}} </a></li>
+                        {% endfor %}
+                      </ul>             
+                      {% else %}
+                      <ul class="list-unstyled fruite-categorie">
+                        <li><a href="#" style="text-decoration: none; color: inherit; font-size: 1.3rem;">☐ No Category Available.</a></li>
+                      </ul> 
+                      {% endif %}                      
+                    </div>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <h3 class="mb-3">Filters</h3>
+                <form id="filterForm">
+                  <div class="mb-3">
+                      <label for="price_range" class="form-label"><h4>Price Range</h4></label>
+                      <div class="col-lg-6 d-flex ">
+                          <input type="text" class="form-control mx-1" id="min_price" placeholder="Min">
+                          <input type="text" class="form-control" id="max_price" placeholder="Max">
+                      </div>
+                      <label for="size" class="form-label"><h4>Size</h4></label>
+                      <select class="form-select" id="size-filter">
+                          <option value="">Select Size</option>
+                          <option value="M">M</option>
+                          <option value="L">L</option>
+                          <option value="XL">XL</option>
+                          <option value="XXL">XXL</option>
+                      </select>
+                  </div>
+                  <div class="d-grid">
+                      <a class="btn btn-primary btn-lg" id="filter" href="#">Filter</a>
+                  </div>
+              </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="row g-4 justify-content-center">
+              <h2>{{products|length}} Items Found</h2>
+              {% for product in products %}
+                <div class="col-md-6 col-lg-6 col-xl-4">
+                    <div class="rounded position-relative shop-item" id="shop-card">
+                        <div class="shop-img">
+                            <a href="{% url 'description' product.id %}">
+                                <img src="{{ product.image.url }}" class="img-fluid w-100 rounded-top" alt="">
+                            </a>
+                        </div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom shop-details">
+                            <h4>
+                                <a href="{% url 'description' product.id %}" class="product-link">
+                                    {{ product.name }}
+                                </a>
+                            </h4>
+                            <p>
+                                {% if product.description|length > 100 %}
+                                {{ product.description|slice:":90" }}...
+                                {% else %}
+                                {{ product.description }}
+                                {% endif %}
+                            </p>
+                            <div class="size-container mb-3">
+                                <div class="text-center">
+                                    <p class="text-dark fs-5 fw-bold mb-0">Price: {{ product.price }} Tk</p>
+                                </div>
+                                <h5 class="mb-1">Select Size:</h5>
+                                {% if product.sizes %}
+                                {% for size in product.sizes.all %}
+                                <button class="size-btn" id="sz-btn" data-size-id="{{ size.id }}">{{ size.name }}</button>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary add-to-cart-btn" data-product-id="{{ product.id }}">
+                                <i class="fas fa-shopping-cart me-2 text-primary"></i> Add to cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="col-12">
+              <div class="pagination d-flex justify-content-center mt-5">
+                <a href="#" class="rounded">&laquo;</a>
+                <a href="#" class="active rounded">1</a>
+                <a href="#" class="rounded">2</a>
+                <a href="#" class="rounded">3</a>
+                <a href="#" class="rounded">4</a>
+                <a href="#" class="rounded">5</a>
+                <a href="#" class="rounded">6</a>
+                <a href="#" class="rounded">&raquo;</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+
+<script>
+  $(document).ready(function() {
+      $('.size-btn').click(function() {
+          $('.size-btn').removeClass('active'); // Remove 'active' class from all size buttons
+          $(this).addClass('active'); // Add 'active' class to the clicked size button
+      });
+
+      $('.add-to-cart-btn').click(function(e) {
+          e.preventDefault(); // Prevent the default action of the anchor tag
+          var productId = $(this).data('product-id');
+          var selectedSizeId = $('.size-btn.active').data('size-id'); // Get the ID of the selected size
+          if (!selectedSizeId) {
+              // If no size is selected, show a message or take any other appropriate action
+              alert('Please select a size');
+              return;
+          }
+          // Redirect to the add_to_cart URL with the selected product ID and size ID
+          window.location.href = '/cart/add_to_cart/' + productId + '/' + selectedSizeId + '/';
+      });
+  });
+  $(document).ready(function() {
+    // Event listener for the filter button click
+    $('#filter').click(function(e) {
+        e.preventDefault(); // Prevent the default action of the anchor tag
+        var minPrice = $('#min_price').val();
+        var maxPrice = $('#max_price').val();
+        var size = $('#size-filter').val();
+        
+        // Check if min price is greater than max price
+        if (!isNaN(minPrice) && !isNaN(maxPrice) && parseInt(minPrice) > parseInt(maxPrice)) {
+            alert('Minimum price cannot be greater than maximum price.');
+            return; // Exit function without redirecting
+        }
+
+        // Construct the filter URL with parameters
+        var url = '/shop/women/filter/?min_price=' + minPrice + '&max_price=' + maxPrice + '&size=' + size;
+        window.location.href = url; // Redirect to the filter URL with parameters
+    });
+});
+
+
+</script>
+
+
+<!-- Fruits Shop End-->
+{% endblock body %}

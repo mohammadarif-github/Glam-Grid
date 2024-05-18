@@ -1,0 +1,152 @@
+{% extends "home.html" %} 
+{% load static %} 
+{% block load_css %} 
+<link rel="stylesheet" type="text/css" href="{% static "css/Shop.css" %}" />
+{% endblock load_css %} 
+{% block body %}
+<!-- <h1>wooomeeeen</h1> -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="flex-shrink-0 p-5 mt-5 d-flex flex-column align-items-center" style="width: 150px" id="catt">
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+              <span class="fs-3 fw-bold">Categories</span>
+            </a>
+            <ul class="list-unstyled ps-1">
+              <li class="mb-1">
+                  <button class="fw-bold btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Men-collapse" aria-expanded="false">
+                    <h3>Men</h3>
+                  </button>
+                  <div class="collapse" id="Men-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-2 small">
+                          <li class="d-flex justify-content-start">
+                              <ul class="list-unstyled ps-3">
+                                {% for category in men_categories %}
+                                  <li><a href="{% url "men_filter" category.slug %}" style="text-decoration: none; color: inherit; font-size: 1.3rem;">☐{{category.name}} </a></li>
+                                {% endfor %}
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <li class="mb-1">
+                  <button class="fw-bold btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Women-collapse" aria-expanded="false">
+                      <h3>Women</h3>
+                  </button>
+                  <div class="collapse" id="Women-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-2 small">
+                          <li class="d-flex justify-content-start">
+                              <ul class="list-unstyled ps-3">
+                                  {% for category in women_categories %}
+                                  <li><a href="{% url "women_filter" category.slug %}" style="text-decoration: none; color: inherit; font-size: 1.3rem;">☐{{category.name}} </a></li>
+                                  {% endfor %}
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <li class="mb-1">
+                <button class="fw-bold btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Shoes-collapse" aria-expanded="false">
+                  <h3>Shoes</h3>
+                </button>
+                <div class="collapse" id="Shoes-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-2 small">
+                        <li class="d-flex justify-content-start">
+                            <ul class="list-unstyled ps-3">
+                                {% for category in shoe_catagories %}
+                                <li><a href="{% url "shoes_filter" category.slug %}" style="text-decoration: none; color: inherit; font-size: 1.3rem;">☐{{category.name}} </a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+          </ul>
+          
+
+          </div>
+          
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <!-- carrrrrrrrrrrrrrrrrrrrrrrrrrrd -->
+            <div class="shop-container">
+              <div
+                class="row row-cols-1 row-cols-md-3 g-3"
+                style="padding-left: 10px"
+              >
+                <div class="col">
+                  <div class="card" style="border: none">
+                    <img
+                      src="{% static "img/f6.jpg" %}"
+                      class="card-img-top"
+                      alt="..."
+                      height="500"
+                      style="border-radius: 20px"
+                    />
+                    <div class="carousel-caption d-none d-md-block">
+                      <h4>Men's wear</h4>
+
+                      <p>
+                        <a href="{% url "men" %}" class="btn btn-outline-success"
+                          >Purchase Now!</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card" style="border: none">
+                    <img
+                      src="{% static "img/f4.jpg" %}"
+                      class="card-img-top"
+                      alt="..."
+                      height="500"
+                      style="border-radius: 20px"
+                    />
+                    <div class="carousel-caption d-none d-md-block">
+                      <h4>Foot wear</h4>
+                      <p>
+                        <a href="{% url "shoes" %}" class="btn btn-outline-success"
+                          >Purchase Now!</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card" style="border: none">
+                    <img
+                      src="{% static "img/f5.jpg" %}"
+                      class="card-img-top"
+                      alt="..."
+                      height="500"
+                      style="border-radius: 20px"
+                    />
+                    <div class="carousel-caption d-none d-md-block">
+                      <h4>Women's Wear</h4>
+                      <p>
+                        <a href="{% url "women" %}" class="btn btn-outline-success"
+                          >Purchase Now!</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end card section -->
+
+            <!-- close carddddddddddddddddddddd -->
+          </div>
+          <br />
+          
+            <!-- end card section -->
+
+            <!-- close carddddddddddddddddddddd -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+{% endblock body %}

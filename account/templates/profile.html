@@ -1,0 +1,74 @@
+{% extends "home.html" %}
+{% load static %}
+{% block load_css %}
+<link rel="stylesheet" type="text/css" href="{% static " css/profile.css" %}" />
+{% endblock load_css %}
+
+{% block body %}
+	<section class="section-content padding-y bg-light" style="margin-top: 80px; margin-bottom: 80px;">
+		<div class="container">
+			<div class="row">
+				<aside class="col-md-3">
+					<!-- SIDEBAR -->
+					<div class="card">
+						<div class="card-body">
+							<ul class="list-group">
+								<a class="list-group-item active" href="{% url 'profile' %}">Profile</a>
+								<a class="list-group-item" href="{% url "order_history" %}">My order history</a>
+								<a class="list-group-item" href="{% url "transactions" %}">Transactions</a>
+								<a class="list-group-item" href="{% url "recieved" %}">Received orders</a>
+							</ul>
+							<a class="btn btn-danger btn-block mt-3" href="{% url 'logout' %}">
+								<i class="fa fa-power-off"></i> Log out
+							</a>
+						</div>
+					</div>
+					<!-- SIDEBAR .//END -->
+				</aside>
+				<main class="col-md-9">
+					<div class="card profile-card">
+						<div class="card-header bg-primary text-white text-center">
+							<i class="fas fa-user-circle fa-7x mb-3"></i>
+						</div>
+						<div class="card-body" style="max-width: 400px; margin: auto; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; background-color: #fff;">
+							<h2 class="text-center mb-4" style="color: #333; font-size: 24px; font-weight: bold;">User Profile</h2>
+							<div class="profile-info" style="text-align: left;">
+								<p class="text-muted mb-2" style="margin-bottom: 10px; font-size: 16px;"><strong>Username:</strong> {{ request.user.username }}</p>
+								<p class="text-muted mb-2" style="margin-bottom: 10px; font-size: 16px;"><strong>First Name:</strong> {{ request.user.first_name }}</p>
+								<p class="text-muted mb-2" style="margin-bottom: 10px; font-size: 16px;"><strong>Last Name:</strong> {{ request.user.last_name }}</p>
+								<p class="text-muted mb-2" style="margin-bottom: 10px; font-size: 16px;"><strong>Email:</strong> {{ request.user.email }}</p>
+								<a href="{% url 'profile_update' %}" class="btn btn-primary mt-3" style="display: block; width: 100%; background-color: #1c64f2; border: none; padding: 10px 0; font-size: 16px; border-radius: 5px;">Update Profile</a>
+								<a href="{% url 'password_change' %}" class="btn btn-primary mt-3" style="display: block; width: 100%; background-color: #1c64f2; border: none; padding: 10px 0; font-size: 16px; border-radius: 5px;">Change Pasword </a>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+	</section>
+	<style>
+		.profile-info p {
+			margin-bottom: 10px;
+			font-size: 16px;
+			color: #666;
+		}
+		.profile-info p strong {
+			color: #333;
+		}
+		.btn-primary {
+			background-color: #1c64f2;
+			border: none;
+			padding: 10px 0;
+			font-size: 16px;
+			border-radius: 5px;
+			text-align: center;
+			display: inline-block;
+			width: 100%;
+			color: #fff;
+			text-decoration: none;
+		}
+		.btn-primary:hover {
+			background-color: #1554b6;
+		}
+	</style>
+{% endblock %}

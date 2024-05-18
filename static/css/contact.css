@@ -1,0 +1,11 @@
+#contact {
+  margin-top: 20px;
+}
+.contact{
+  height: 100vh;
+}
+
+/* Add margin to the bottom of the image column */
+.bg-image {
+  margin-bottom: 20px;
+}
